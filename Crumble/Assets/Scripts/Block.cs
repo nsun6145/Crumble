@@ -7,6 +7,7 @@ public class Block : MonoBehaviour {
     public bool fallen = false;
     private float fallSpeed = -0.1f;
     Animator anim;
+    private bool played = false;
 
 	// Use this for initialization
 	void Start () {
@@ -20,6 +21,14 @@ public class Block : MonoBehaviour {
 
     public void Fall()
     {
-        if (fallen) transform.Translate(new Vector3(0,fallSpeed,0));
+        if(fallen && !played)
+        {
+            played = true;
+            anim.Play(0);
+        }
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Cube_Drop"))
+        {
+            if (fallen) transform.Translate(new Vector3(0, fallSpeed, 0));
+        }
     }
 }
