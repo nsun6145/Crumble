@@ -19,16 +19,17 @@ public class Block : MonoBehaviour {
         Fall();
 	}
 
+    public void animate()
+    {
+        anim.SetBool("Animating",true);
+    }
+
     public void Fall()
     {
-        if(fallen && !played)
+        if (fallen)
         {
-            played = true;
-            anim.Play(0);
-        }
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Cube_Drop"))
-        {
-            if (fallen) transform.Translate(new Vector3(0, fallSpeed, 0));
+            anim.SetBool("Animating", false);
+            transform.Translate(new Vector3(0, fallSpeed, 0));
         }
     }
 }
