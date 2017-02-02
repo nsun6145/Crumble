@@ -7,6 +7,8 @@ public class GameController : MonoBehaviour {
     public GameObject blockPref;
     private List<GameObject> blocks = new List<GameObject>();
     private float timer = 0;
+    private int animNum = -1;
+    private int dropNum = -1;
 
 	// Use this for initialization
 	void Start () {
@@ -23,15 +25,29 @@ public class GameController : MonoBehaviour {
         timer += Time.deltaTime;
         if(timer >= 2)
         {
+            if(animNum == -1)
+            {
+                animNum = dropNum = Random.Range(0, blocks.Count - 1);
+                animate();
+            }
+            else
+            {
+                drop();
+                animNum = dropNum = Random.Range(0, blocks.Count - 1);
+                animate();
+            }
             timer -= 2;
-            drop();
         }
-	}
+    }
+
+    void animate()
+    {
+        blocks[animNum].GetComponent<Block>().animate();
+    }
 
     void drop()
     {
-        int num = Random.Range(0, blocks.Count - 1);
-        blocks[num].GetComponent<Block>().fallen = true;
-        blocks.RemoveAt(num);
+        blocks[dropNum].GetComponent<Block>().fallen = true;
+        blocks.RemoveAt(dropNum);
     }
 }
