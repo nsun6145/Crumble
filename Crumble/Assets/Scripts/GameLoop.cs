@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class GameLoop : MonoBehaviour
 {
-    public int value; //Checks the current state
-    public bool gameOver = false;
+    private int value; //Checks the current state
+    private bool gameOver = false;
 
     // Use this for initialization
     void Start()
@@ -54,6 +54,16 @@ public class GameLoop : MonoBehaviour
             case 2:
                 SceneManager.LoadScene("GameOver", LoadSceneMode.Additive); //Currently loads game over screen
                 break;
+
+            case 3:
+                SceneManager.LoadScene("PreGame"); //Loads level (Change name of level as needed)
+                break;
+
+            case 4:
+                
+                Application.Quit(); //Loads level (Change name of level as needed)
+                break;
+
         }
     }
 }
