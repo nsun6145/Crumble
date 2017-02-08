@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class GameController : MonoBehaviour {
 
     public GameObject blockPref;
+    public GameObject playerPref;
     private List<GameObject> blocks = new List<GameObject>();
     private float timer = 0;
 
@@ -16,6 +18,9 @@ public class GameController : MonoBehaviour {
                 GameObject temp = Instantiate<GameObject>(blockPref, new Vector3(i, 0, j), new Quaternion());
                 blocks.Add(temp);
             }
+
+       GameObject player = Instantiate<GameObject>(playerPref, new Vector3(0, 2, 0), new Quaternion()); 
+        
 	}
 	
 	// Update is called once per frame
@@ -34,4 +39,15 @@ public class GameController : MonoBehaviour {
         blocks[num].GetComponent<Block>().fallen = true;
         blocks.RemoveAt(num);
     }
+
+    void weather() {
+
+        int rng = Random.Range(1,4); //random number generator
+
+        //switch (rng): 
+
+        }
+
+    }
+
 }
