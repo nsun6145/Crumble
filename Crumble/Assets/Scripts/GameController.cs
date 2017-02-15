@@ -5,6 +5,9 @@ using UnityEngine;
 public class GameController : MonoBehaviour {
 
     public GameObject blockPref;
+    public GameObject map;
+    public RuntimeAnimatorController fallingAnimator;
+    public bool createBlocksMap; //create default cube map
     private List<GameObject> blocks = new List<GameObject>();
     private float timer = 0;
     private int animNum = -1;
@@ -12,12 +15,26 @@ public class GameController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		for(int i = -4; i < 5; i++)
-            for(int j = -4; j < 5; j++)
+        if (createBlocksMap)
+        {
+            for (int i = -4; i < 5; i++)
+                for (int j = -4; j < 5; j++)
+                {
+                    GameObject temp = Instantiate<GameObject>(blockPref, new Vector3(i, 0, j), new Quaternion());
+                    blocks.Add(temp);
+                }
+        }
+        else
+        {
+
+            foreach (Transform c in map.transform)
             {
-                GameObject temp = Instantiate<GameObject>(blockPref, new Vector3(i, 0, j), new Quaternion());
-                blocks.Add(temp);
+                GameObject child = c.gameObject;
+                child.AddComponent<Block>();        
+                child.AddComponent<Animator>().runtimeAnimatorController = fallingAnimator;
+                blocks.Add(child);
             }
+        }
 	}
 	
 	// Update is called once per frame

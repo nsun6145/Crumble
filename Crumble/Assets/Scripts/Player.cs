@@ -8,7 +8,7 @@ public class Player : MonoBehaviour {
     public int controllerNumber; //joystick number of player, public for debug
     private Vector3 startingPosition = new Vector3(0.0f,1.0f,-6.5f);
 
-    private float maxSpeed = 10.0f;
+    public float maxSpeed = 8.0f;
     public float jumpPower = 7.0f;
     private float jumpDelay = 0.6f;
     private bool canJump = true;
