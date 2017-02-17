@@ -40,17 +40,20 @@ public class GameController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         timer += Time.deltaTime;
-        if(timer >= 2)
+        if(blocks.Count > 1 && timer >= 2)
         {
             if(animNum == -1)
             {
                 animNum = dropNum = Random.Range(0, blocks.Count - 1);
+                Debug.Log("1 : " + animNum);
                 animate();
             }
             else
             {
                 drop();
+                Debug.Log("2a : " + animNum);
                 animNum = dropNum = Random.Range(0, blocks.Count - 1);
+                Debug.Log("2 : " + animNum);
                 animate();
             }
             timer -= 2;
