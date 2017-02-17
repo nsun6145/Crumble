@@ -48,7 +48,7 @@ public class GameLoop : MonoBehaviour
 
             case 1:
                 gameOver = false;
-                SceneManager.LoadScene("TestSun"); //Loads level (Change name of level as needed)
+                SceneManager.LoadScene("Ilan_debug"); //Loads level (Change name of level as needed)
                 break;
 
             case 2:
