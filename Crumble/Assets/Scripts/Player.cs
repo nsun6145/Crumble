@@ -16,7 +16,8 @@ public class Player : MonoBehaviour {
     private Rigidbody _rigidbody;
     private Quaternion rotation;
 
-
+	float moveX = 0;
+	float moveY = 0;
 	// Use this for initialization
 	void Start () {
         _rigidbody = this.GetComponent<Rigidbody>();
@@ -26,11 +27,34 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		//keyboard is automatically applied to player one
+		if (controllerNumber != 1) {
+			
+			//position of the movement thumbstick
+			moveX = Input.GetAxis ("Horizontal_" + controllerNumber);
+			moveY = Input.GetAxis ("Vertical_" + controllerNumber);
 
-        //position of the movement thumbstick
-        float moveX = Input.GetAxis("Horizontal_" + controllerNumber);
-        float moveY = Input.GetAxis("Vertical_" + controllerNumber);
-
+		//Convert Keyboard into controller axis
+		} else {
+			if(Input.GetKey("up")){
+				moveY = Mathf.Min(1,moveY+.1f);
+			}
+			if(Input.GetKey("down")){
+				moveY = Mathf.Max(-1,moveY-.1f);
+			}
+			if(Input.GetKey("left")){
+				moveX = Mathf.Max(-1,moveX-.1f);
+			}
+			if(Input.GetKey("right")){
+				moveX = Mathf.Min(1,moveX+.1f);
+			}
+			if(!Input.GetKey("up") && !Input.GetKey("down")){
+				moveY = 0;
+			}
+			if(!Input.GetKey("left") && !Input.GetKey("right")){
+				moveX = 0;
+			}
+		}
         if(moveX != 0 || moveY != 0) //only does movement code if you are moving
 
         {
@@ -58,7 +82,7 @@ public class Player : MonoBehaviour {
 
        
 
-        if (canJump && Input.GetButtonDown("Jump_" + controllerNumber))
+		if (canJump && Input.GetButtonDown("Jump_" + controllerNumber) || (Input.GetKeyDown(KeyCode.Space) && controllerNumber == 1))
         {
             StartCoroutine(Jump());
         }
