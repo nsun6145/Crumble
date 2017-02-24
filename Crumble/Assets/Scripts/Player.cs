@@ -9,24 +9,28 @@ public class Player : MonoBehaviour {
     private Vector3 startingPosition = new Vector3(0.0f,1.0f,-6.5f);
 
     public float maxSpeed = 8.0f;
-    private float jumpPower = 9.6f; //use 9.6f
+    private float jumpPower = 11.6f; //<
     private float jumpDelay = 0.8f;
     private bool canJump = true;
 
     private Rigidbody _rigidbody;
     private Quaternion rotation;
 
-	float moveX = 0;
+    float moveX = 0;
 	float moveY = 0;
 	// Use this for initialization
 	void Start () {
         _rigidbody = this.GetComponent<Rigidbody>();
+        Physics.gravity = new Vector3(0, -29.8f, 0); //<
 
         //controllerNumber = 1;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+        
+
 		//keyboard is automatically applied to player one
 		if (controllerNumber != 1) {
 			
@@ -109,5 +113,16 @@ public class Player : MonoBehaviour {
         _rigidbody.AddForce(new Vector3(0, jumpPower, 0), ForceMode.VelocityChange);
     }
 
+    private void footstool() {
+        _rigidbody.AddForce(new Vector3(0, jumpPower / 2, 0), ForceMode.VelocityChange);
+    }
+
+    private void bounce() {
+        _rigidbody.AddForce(new Vector3(-3.0f, jumpPower / 2, 0), ForceMode.VelocityChange);
+    }
+
+    void OnCollisionEnter(Collision collision) {
+
+    }
 
 }
