@@ -9,7 +9,7 @@ public class Player : MonoBehaviour {
     private Vector3 startingPosition = new Vector3(0.0f,1.0f,-6.5f);
 
     public float maxSpeed = 8.0f;
-    public float jumpPower = 7.0f;
+    private float jumpPower = 11.6f;
     private float jumpDelay = 0.6f;
     private bool canJump = true;
 
@@ -21,7 +21,7 @@ public class Player : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         _rigidbody = this.GetComponent<Rigidbody>();
-
+        Physics.gravity = new Vector3(0, -29.8f, 0);
         //controllerNumber = 1;
 	}
 	
@@ -29,7 +29,6 @@ public class Player : MonoBehaviour {
 	void Update () {
 		//keyboard is automatically applied to player one
 		if (controllerNumber != 1) {
-			
 			//position of the movement thumbstick
 			moveX = Input.GetAxis ("Horizontal_" + controllerNumber);
 			moveY = Input.GetAxis ("Vertical_" + controllerNumber);
@@ -49,11 +48,26 @@ public class Player : MonoBehaviour {
 				moveX = Mathf.Min(1,moveX+.1f);
 			}
 			if(!Input.GetKey("up") && !Input.GetKey("down")){
-				moveY = 0;
+                if(moveY > 0)
+                {
+                    moveY = Mathf.Max(0, moveY - .5f);
+                }
+                else if(moveY < 0)
+                {
+                    moveY = Mathf.Min(0, moveY + .5f);
+                }
+				
 			}
 			if(!Input.GetKey("left") && !Input.GetKey("right")){
-				moveX = 0;
-			}
+                if (moveX > 0)
+                {
+                    moveX = Mathf.Max(0, moveX - .5f);
+                }
+                else if(moveX < 0)
+                {
+                    moveX = Mathf.Min(0, moveX + .5f);
+                }
+            }
 		}
         if(moveX != 0 || moveY != 0) //only does movement code if you are moving
 
@@ -80,9 +94,7 @@ public class Player : MonoBehaviour {
 
         }
 
-       
-
-		if (canJump && Input.GetButtonDown("Jump_" + controllerNumber) || (Input.GetKeyDown(KeyCode.Space) && controllerNumber == 1))
+		if (canJump && Input.GetButtonDown("Jump_" + controllerNumber) || canJump && (Input.GetKeyDown(KeyCode.Space) && controllerNumber == 1))
         {
             StartCoroutine(Jump());
         }
