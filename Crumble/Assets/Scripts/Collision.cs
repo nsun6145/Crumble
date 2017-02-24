@@ -13,22 +13,24 @@ public class Collision : MonoBehaviour {
 	void Update () {
         Ray ray = new Ray(this.transform.position, this.transform.up * -1);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, 2)){
+        if (Physics.Raycast(ray, out hit, 1)){
             if (hit.transform.tag == "Ice")
             {
                 Rigidbody rigid = this.gameObject.GetComponent <Rigidbody>();
-                rigid.drag = (int)0;
+                rigid.drag = .01f;
+                rigid.angularDrag = 0;
             }
             else if(hit.transform.tag == "Player")
             {
                 Rigidbody rigid = this.gameObject.GetComponent<Rigidbody>();
                 rigid.AddForce(new Vector3(0, 2, 0), ForceMode.VelocityChange);
-            }
-            else
-            {
-                Rigidbody rigid = this.gameObject.GetComponent<Rigidbody>();
-                rigid.drag = .5f;
-            }
+            }     
         }
-	}
+        else
+        {
+            Rigidbody rigid = this.gameObject.GetComponent<Rigidbody>();
+            rigid.drag = 1f;
+            rigid.angularDrag = 0.05f;
+        }
+    }
 }
