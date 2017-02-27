@@ -61,11 +61,11 @@ public class Player : MonoBehaviour {
 			if(!Input.GetKey("left") && !Input.GetKey("right")){
                 if (moveX > 0)
                 {
-                    moveX = Mathf.Max(0, moveX - .6f);
+                    moveX = Mathf.Max(0, moveX - .8f);
                 }
                 else if(moveX < 0)
                 {
-                    moveX = Mathf.Min(0, moveX + .6f);
+                    moveX = Mathf.Min(0, moveX + .8f);
                 }
             }
             if(Mathf.Abs(moveX) > .75 && Mathf.Abs(moveY) > .75)

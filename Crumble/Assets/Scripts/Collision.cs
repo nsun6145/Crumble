@@ -3,17 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Collision : MonoBehaviour {
-
+    public float dragAmount;
 	// Use this for initialization
 	void Start () {
-		
 	}
 	
 	// Update is called once per frame
 	void Update () {
         Ray ray = new Ray(this.transform.position, this.transform.up * -1);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, 1)){
+        if (Physics.Raycast(ray, out hit, 2)){
             if (hit.transform.tag == "Ice")
             {
                 Rigidbody rigid = this.gameObject.GetComponent <Rigidbody>();
@@ -29,7 +28,7 @@ public class Collision : MonoBehaviour {
         else
         {
             Rigidbody rigid = this.gameObject.GetComponent<Rigidbody>();
-            rigid.drag = 1f;
+            rigid.drag = dragAmount;
             rigid.angularDrag = 0.05f;
         }
     }
