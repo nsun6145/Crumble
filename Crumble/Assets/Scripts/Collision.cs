@@ -23,7 +23,13 @@ public class Collision : MonoBehaviour {
             {
                 Rigidbody rigid = this.gameObject.GetComponent<Rigidbody>();
                 rigid.AddForce(new Vector3(0, 2, 0), ForceMode.VelocityChange);
-            }     
+            }
+            else
+            {
+                Rigidbody rigid = this.gameObject.GetComponent<Rigidbody>();
+                rigid.drag = dragAmount;
+                rigid.angularDrag = 0.05f;
+            }
         }
         else
         {

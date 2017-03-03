@@ -206,6 +206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88351e962bb0ef744a835b8ba2aeab21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dragAmount: 1
 --- !u!1 &105374304
 GameObject:
   m_ObjectHideFlags: 0
@@ -3799,6 +3800,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88351e962bb0ef744a835b8ba2aeab21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dragAmount: 1
 --- !u!1 &638968539 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100002, guid: 9671f68fa00593c48abcca8a0d7d6604, type: 3}
