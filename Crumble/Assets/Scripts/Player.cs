@@ -9,8 +9,13 @@ public class Player : MonoBehaviour {
     private Vector3 startingPosition = new Vector3(0.0f,1.0f,-6.5f);
 
     public float maxSpeed = 8.0f;
+<<<<<<< HEAD
     private float jumpPower = 11.6f; //<
     private float jumpDelay = 0.8f;
+=======
+    private float jumpPower = 12f;
+    private float jumpDelay = 0.6f;
+>>>>>>> master
     private bool canJump = true;
 
     private Rigidbody _rigidbody;
@@ -42,22 +47,68 @@ public class Player : MonoBehaviour {
 		} else {
 			if(Input.GetKey("up")){
 				moveY = Mathf.Min(1,moveY+.1f);
+				moveY = Mathf.Min(1,moveY+.4f);
 			}
 			if(Input.GetKey("down")){
 				moveY = Mathf.Max(-1,moveY-.1f);
+				moveY = Mathf.Max(-1,moveY-.4f);
 			}
 			if(Input.GetKey("left")){
 				moveX = Mathf.Max(-1,moveX-.1f);
+				moveX = Mathf.Max(-1,moveX-.4f);
 			}
 			if(Input.GetKey("right")){
 				moveX = Mathf.Min(1,moveX+.1f);
+				moveX = Mathf.Min(1,moveX+.4f);
 			}
 			if(!Input.GetKey("up") && !Input.GetKey("down")){
+<<<<<<< HEAD
 				moveY = 0;
 			}
 			if(!Input.GetKey("left") && !Input.GetKey("right")){
 				moveX = 0;
 			}
+=======
+                if(moveY > 0)
+                {
+                    moveY = Mathf.Max(0, moveY - .6f);
+                }
+                else if(moveY < 0)
+                {
+                    moveY = Mathf.Min(0, moveY + .6f);
+                }
+				
+			}
+			if(!Input.GetKey("left") && !Input.GetKey("right")){
+                if (moveX > 0)
+                {
+                    moveX = Mathf.Max(0, moveX - .8f);
+                }
+                else if(moveX < 0)
+                {
+                    moveX = Mathf.Min(0, moveX + .8f);
+                }
+            }
+            if(Mathf.Abs(moveX) > .75 && Mathf.Abs(moveY) > .75)
+            {
+                if(moveX < 0)
+                {
+                    moveX = -.75f;
+                }
+                else
+                {
+                    moveX = .75f;
+                }
+                if (moveY < 0)
+                {
+                    moveY = -.75f;
+                }
+                else
+                {
+                    moveY = .75f;
+                }
+            }
+>>>>>>> master
 		}
         if(moveX != 0 || moveY != 0) //only does movement code if you are moving
 
@@ -68,7 +119,7 @@ public class Player : MonoBehaviour {
                                                moveY);
 
             //moving character
-            _rigidbody.velocity = new Vector3(axisVector.x * maxSpeed, _rigidbody.velocity.y, axisVector.z * maxSpeed);
+            _rigidbody.AddForce(axisVector * 4 * maxSpeed);
 
             //rotating character
             Vector2 t = new Vector2(moveX, moveY);
