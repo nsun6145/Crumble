@@ -9,17 +9,13 @@ public class Player : MonoBehaviour {
     private Vector3 startingPosition = new Vector3(0.0f,1.0f,-6.5f);
 
     public float maxSpeed = 8.0f;
-<<<<<<< HEAD
-    private float jumpPower = 11.6f; //<
-    private float jumpDelay = 0.8f;
-=======
+
     private float jumpPower = 12f;
     private float jumpDelay = 0.6f;
-<<<<<<< HEAD
+
     private float stunTime = 1.5f;
-=======
->>>>>>> master
->>>>>>> Branch_Sun2
+
+
     private bool canJump = true;
     private bool canPunch = true;
     private bool canMove = true;
@@ -27,15 +23,13 @@ public class Player : MonoBehaviour {
     private Rigidbody _rigidbody;
     private Quaternion rotation;
 
-<<<<<<< HEAD
+
     private Fist rightFist;
     //private GameObject punchBox;
 
 	float moveX = 0;
-=======
-    float moveX = 0;
->>>>>>> Branch_Sun2
 	float moveY = 0;
+
 	// Use this for initialization
 	void Start () {
         _rigidbody = this.GetComponent<Rigidbody>();
@@ -50,7 +44,6 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-<<<<<<< HEAD
         //keyboard is automatically applied to player one
         if (!canMove)
         {
@@ -58,90 +51,28 @@ public class Player : MonoBehaviour {
         }
         else if (controllerNumber == 1)
         {
-
             moveX = Input.GetAxis("Horizontal_" + controllerNumber);
             moveY = Input.GetAxis("Vertical_" + controllerNumber);
-
-            if (Input.GetKey("up"))
-            {
+        }
+        if (controllerNumber != 1)
+        {
+            if (Input.GetKey("up")) {
+                moveY = Mathf.Min(1, moveY + .1f);
                 moveY = Mathf.Min(1, moveY + .4f);
             }
-            if (Input.GetKey("down"))
-            {
+            if (Input.GetKey("down")) {
+                moveY = Mathf.Max(-1, moveY - .1f);
                 moveY = Mathf.Max(-1, moveY - .4f);
             }
-            if (Input.GetKey("left"))
-            {
+            if (Input.GetKey("left")) {
+                moveX = Mathf.Max(-1, moveX - .1f);
                 moveX = Mathf.Max(-1, moveX - .4f);
             }
-            if (Input.GetKey("right"))
-            {
+            if (Input.GetKey("right")) {
+                moveX = Mathf.Min(1, moveX + .1f);
                 moveX = Mathf.Min(1, moveX + .4f);
             }
-            if (!Input.GetKey("up") && !Input.GetKey("down"))
-            {
-                if (moveY > 0)
-=======
-
-        
-
-		//keyboard is automatically applied to player one
-		if (controllerNumber != 1) {
-			
-			//position of the movement thumbstick
-			moveX = Input.GetAxis ("Horizontal_" + controllerNumber);
-			moveY = Input.GetAxis ("Vertical_" + controllerNumber);
-
-		//Convert Keyboard into controller axis
-		} else {
-			if(Input.GetKey("up")){
-				moveY = Mathf.Min(1,moveY+.1f);
-				moveY = Mathf.Min(1,moveY+.4f);
-			}
-			if(Input.GetKey("down")){
-				moveY = Mathf.Max(-1,moveY-.1f);
-				moveY = Mathf.Max(-1,moveY-.4f);
-			}
-			if(Input.GetKey("left")){
-				moveX = Mathf.Max(-1,moveX-.1f);
-				moveX = Mathf.Max(-1,moveX-.4f);
-			}
-			if(Input.GetKey("right")){
-				moveX = Mathf.Min(1,moveX+.1f);
-				moveX = Mathf.Min(1,moveX+.4f);
-			}
-			if(!Input.GetKey("up") && !Input.GetKey("down")){
-<<<<<<< HEAD
-				moveY = 0;
-			}
-			if(!Input.GetKey("left") && !Input.GetKey("right")){
-				moveX = 0;
-			}
-=======
-                if(moveY > 0)
->>>>>>> Branch_Sun2
-                {
-                    moveY = Mathf.Max(0, moveY - .6f);
-                }
-                else if (moveY < 0)
-                {
-                    moveY = Mathf.Min(0, moveY + .6f);
-                }
-
-            }
-            if (!Input.GetKey("left") && !Input.GetKey("right"))
-            {
-                if (moveX > 0)
-                {
-                    moveX = Mathf.Max(0, moveX - .6f);
-                    moveX = Mathf.Max(0, moveX - .8f);
-                }
-                else if (moveX < 0)
-                {
-                    moveX = Mathf.Min(0, moveX + .6f);
-                    moveX = Mathf.Min(0, moveX + .8f);
-                }
-            }
+            
             if (Mathf.Abs(moveX) > .75 && Mathf.Abs(moveY) > .75)
             {
                 if (moveX < 0)
@@ -161,27 +92,14 @@ public class Player : MonoBehaviour {
                     moveY = .75f;
                 }
             }
-<<<<<<< HEAD
-        }
-        else
-        {
-
-            moveX = Input.GetAxis("Horizontal_" + controllerNumber);
-            moveY = Input.GetAxis("Vertical_" + controllerNumber);
         }
 
         if (moveX != 0 || moveY != 0) //only does movement code if you are moving
-=======
->>>>>>> master
-		}
-        if(moveX != 0 || moveY != 0) //only does movement code if you are moving
->>>>>>> Branch_Sun2
-
         {
             Vector3 axisVector = new Vector3(
-                                               moveX,
-                                               0,
-                                               moveY);
+                                                moveX,
+                                                0,
+                                                moveY);
 
             //moving character
             _rigidbody.AddForce(axisVector * 4 * maxSpeed);
@@ -200,9 +118,7 @@ public class Player : MonoBehaviour {
 
         }
 
-       
-
-		if (canJump && Input.GetButtonDown("Jump_" + controllerNumber) || canJump && (Input.GetKeyDown(KeyCode.Space) && controllerNumber == 1))
+        if (canJump && Input.GetButtonDown("Jump_" + controllerNumber) || canJump && (Input.GetKeyDown(KeyCode.Space) && controllerNumber == 1))
         {
             StartCoroutine(Jump());
         }
@@ -218,7 +134,6 @@ public class Player : MonoBehaviour {
             Debug.Log("Punch");
             StartCoroutine(Punch(2.0f));
         }
-
     }
 
     IEnumerator Jump()
@@ -263,7 +178,7 @@ public class Player : MonoBehaviour {
         _rigidbody.AddForce(new Vector3(0, jumpPower, 0), ForceMode.VelocityChange);
     }
 
-<<<<<<< HEAD
+
     public bool CanPunch
     {
         get { return canPunch; }
@@ -283,7 +198,7 @@ public class Player : MonoBehaviour {
     {
         StartCoroutine(Stun(Direction));
     }
-=======
+
     private void footstool() {
         _rigidbody.AddForce(new Vector3(0, jumpPower / 2, 0), ForceMode.VelocityChange);
     }
@@ -296,5 +211,4 @@ public class Player : MonoBehaviour {
 
     }
 
->>>>>>> Branch_Sun2
 }
