@@ -1,0 +1,161 @@
+fileFormatVersion: 2
+guid: 3c4e8003e293ab24da1b3f10922e17d0
+timeCreated: 1486092991
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: CollapsingTerrain
+    100002: FlatBottom
+    100004: FlatCenter
+    100006: FlatLeft
+    100008: FlatRight
+    100010: FlatTop
+    100012: //RootNode
+    100014: group
+    100016: group1
+    100018: Hillbottom
+    100020: HillCenter
+    100022: HillLeft
+    100024: HillRight
+    100026: HillTop
+    100028: pasted__group
+    100030: pasted__pasted__pSphere1
+    100032: pasted__pSphere1
+    100034: pCone1
+    100036: pSphere1
+    100038: Tree
+    400000: CollapsingTerrain
+    400002: FlatBottom
+    400004: FlatCenter
+    400006: FlatLeft
+    400008: FlatRight
+    400010: FlatTop
+    400012: //RootNode
+    400014: group
+    400016: group1
+    400018: Hillbottom
+    400020: HillCenter
+    400022: HillLeft
+    400024: HillRight
+    400026: HillTop
+    400028: pasted__group
+    400030: pasted__pasted__pSphere1
+    400032: pasted__pSphere1
+    400034: pCone1
+    400036: pSphere1
+    400038: Tree
+    2300000: FlatBottom
+    2300002: FlatCenter
+    2300004: FlatLeft
+    2300006: FlatRight
+    2300008: FlatTop
+    2300010: Hillbottom
+    2300012: HillCenter
+    2300014: HillLeft
+    2300016: HillRight
+    2300018: HillTop
+    2300020: pasted__pasted__pSphere1
+    2300022: pasted__pSphere1
+    2300024: pCone1
+    2300026: pSphere1
+    2300028: Tree
+    3300000: FlatBottom
+    3300002: FlatCenter
+    3300004: FlatLeft
+    3300006: FlatRight
+    3300008: FlatTop
+    3300010: Hillbottom
+    3300012: HillCenter
+    3300014: HillLeft
+    3300016: HillRight
+    3300018: HillTop
+    3300020: pasted__pasted__pSphere1
+    3300022: pasted__pSphere1
+    3300024: pCone1
+    3300026: pSphere1
+    3300028: Tree
+    4300000: FlatLeft
+    4300002: FlatBottom
+    4300004: FlatRight
+    4300006: FlatCenter
+    4300008: pCone1
+    4300010: FlatTop
+    4300012: HillRight
+    4300014: Tree
+    4300016: pSphere1
+    4300018: pasted__pSphere1
+    4300020: pasted__pasted__pSphere1
+    4300022: Hillbottom
+    4300024: HillTop
+    4300026: HillLeft
+    4300028: HillCenter
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

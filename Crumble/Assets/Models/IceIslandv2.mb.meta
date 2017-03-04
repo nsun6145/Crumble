@@ -1,0 +1,182 @@
+fileFormatVersion: 2
+guid: 46cd44c58a9caee4fb422226c1124b09
+timeCreated: 1486092847
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Bridge
+    100002: FlatBottom
+    100004: FlatBottomLeft
+    100006: FlatBottomRight
+    100008: FlatCenterBottom
+    100010: FlatCenterLeft
+    100012: FlatCenterRight
+    100014: FlatCenterTop
+    100016: FlatTop
+    100018: FlatTopLeft
+    100020: FlatTopRight
+    100022: FloatingIce
+    100024: HillLeft
+    100026: HillRight
+    100028: IceIsland
+    100030: //RootNode
+    100032: Icicles
+    100034: IslandBottom
+    100036: IslandTop
+    100038: Ocean
+    100040: pasted__pasted__pCone1
+    100042: pasted__pCone1
+    100044: Scenery
+    400000: Bridge
+    400002: FlatBottom
+    400004: FlatBottomLeft
+    400006: FlatBottomRight
+    400008: FlatCenterBottom
+    400010: FlatCenterLeft
+    400012: FlatCenterRight
+    400014: FlatCenterTop
+    400016: FlatTop
+    400018: FlatTopLeft
+    400020: FlatTopRight
+    400022: FloatingIce
+    400024: HillLeft
+    400026: HillRight
+    400028: IceIsland
+    400030: //RootNode
+    400032: Icicles
+    400034: IslandBottom
+    400036: IslandTop
+    400038: Ocean
+    400040: pasted__pasted__pCone1
+    400042: pasted__pCone1
+    400044: Scenery
+    2300000: Bridge
+    2300002: FlatBottom
+    2300004: FlatBottomLeft
+    2300006: FlatBottomRight
+    2300008: FlatCenterBottom
+    2300010: FlatCenterLeft
+    2300012: FlatCenterRight
+    2300014: FlatCenterTop
+    2300016: FlatTop
+    2300018: FlatTopLeft
+    2300020: FlatTopRight
+    2300022: FloatingIce
+    2300024: HillLeft
+    2300026: HillRight
+    2300028: Icicles
+    2300030: IslandBottom
+    2300032: IslandTop
+    2300034: Ocean
+    2300036: pasted__pasted__pCone1
+    2300038: pasted__pCone1
+    3300000: Bridge
+    3300002: FlatBottom
+    3300004: FlatBottomLeft
+    3300006: FlatBottomRight
+    3300008: FlatCenterBottom
+    3300010: FlatCenterLeft
+    3300012: FlatCenterRight
+    3300014: FlatCenterTop
+    3300016: FlatTop
+    3300018: FlatTopLeft
+    3300020: FlatTopRight
+    3300022: FloatingIce
+    3300024: HillLeft
+    3300026: HillRight
+    3300028: Icicles
+    3300030: IslandBottom
+    3300032: IslandTop
+    3300034: Ocean
+    3300036: pasted__pasted__pCone1
+    3300038: pasted__pCone1
+    4300000: FlatCenterBottom
+    4300002: HillRight
+    4300004: Bridge
+    4300006: HillLeft
+    4300008: FlatTop
+    4300010: Icicles
+    4300012: pasted__pCone1
+    4300014: pasted__pasted__pCone1
+    4300016: FlatTopRight
+    4300018: FlatTopLeft
+    4300020: FlatBottomLeft
+    4300022: IslandTop
+    4300024: IslandBottom
+    4300026: FlatCenterLeft
+    4300028: FlatCenterTop
+    4300030: FlatBottomRight
+    4300032: FlatBottom
+    4300034: FlatCenterRight
+    4300036: FloatingIce
+    4300038: Ocean
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
