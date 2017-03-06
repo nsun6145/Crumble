@@ -634,7 +634,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88351e962bb0ef744a835b8ba2aeab21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dragAmount: 1
+  dragAmount: 2
 --- !u!1 &989174296 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100028, guid: 70db7d9a5d97a81448fd24272631e680, type: 3}
@@ -3515,7 +3515,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88351e962bb0ef744a835b8ba2aeab21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dragAmount: 1
+  dragAmount: 2
 --- !u!1 &1589741095
 GameObject:
   m_ObjectHideFlags: 0
@@ -3844,6 +3844,11 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 90c7d28c8aedf0342bba820aac605fc8, type: 2}
+    - target: {fileID: 114116371753068052, guid: 75d32806bc97f014a99a50715c501010,
+        type: 2}
+      propertyPath: controllerNumber
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 75d32806bc97f014a99a50715c501010, type: 2}
   m_IsPrefabParent: 0

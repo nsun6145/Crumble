@@ -16,8 +16,7 @@ public class Collision : MonoBehaviour {
             if (hit.transform.tag == "Ice")
             {
                 Rigidbody rigid = this.gameObject.GetComponent <Rigidbody>();
-                rigid.drag = .01f;
-                rigid.angularDrag = 0;
+                rigid.drag = .2f;
             }
             else if(hit.transform.tag == "Player")
             {

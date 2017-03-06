@@ -49,30 +49,49 @@ public class Player : MonoBehaviour {
         {
             return;
         }
-        else if (controllerNumber == 1)
+        else if (controllerNumber != 1)
         {
             moveX = Input.GetAxis("Horizontal_" + controllerNumber);
             moveY = Input.GetAxis("Vertical_" + controllerNumber);
         }
-        if (controllerNumber != 1)
+        if (controllerNumber == 1)
         {
             if (Input.GetKey("up")) {
-                moveY = Mathf.Min(1, moveY + .1f);
-                moveY = Mathf.Min(1, moveY + .4f);
+                moveY = Mathf.Min(1, moveY + .8f);
             }
             if (Input.GetKey("down")) {
-                moveY = Mathf.Max(-1, moveY - .1f);
-                moveY = Mathf.Max(-1, moveY - .4f);
+                moveY = Mathf.Max(-1, moveY - .8f);
             }
             if (Input.GetKey("left")) {
-                moveX = Mathf.Max(-1, moveX - .1f);
-                moveX = Mathf.Max(-1, moveX - .4f);
+                moveX = Mathf.Max(-1, moveX - .8f);
             }
             if (Input.GetKey("right")) {
-                moveX = Mathf.Min(1, moveX + .1f);
-                moveX = Mathf.Min(1, moveX + .4f);
+                moveX = Mathf.Min(1, moveX + .8f);
             }
-            
+
+            if (!Input.GetKey("up") && !Input.GetKey("down"))
+            {
+                if (moveY < 0)
+                {
+                    moveY = Mathf.Max(0, moveY - .9f);
+                }
+                else
+                {
+                    moveY = Mathf.Min(0, moveY + .9f);
+                }
+            }
+            if (!Input.GetKey("left") && !Input.GetKey("right"))
+            {
+                if (moveX < 0)
+                {
+                    moveX = Mathf.Max(0, moveX - .9f);
+                }
+                else
+                {
+                    moveX = Mathf.Min(0, moveX + .9f);
+                }
+            }
+
             if (Mathf.Abs(moveX) > .75 && Mathf.Abs(moveY) > .75)
             {
                 if (moveX < 0)
@@ -207,8 +226,5 @@ public class Player : MonoBehaviour {
         _rigidbody.AddForce(new Vector3(-3.0f, jumpPower / 2, 0), ForceMode.VelocityChange);
     }
 
-    void OnCollisionEnter(Collision collision) {
-
-    }
 
 }
