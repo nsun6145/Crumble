@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
-
+    public float dragAmount;
+    public string collisionTag;
     private int playerNumber; //player number in relation to the game
     public int controllerNumber; //joystick number of player, public for debug
     private Vector3 startingPosition = new Vector3(0.0f,1.0f,-6.5f);
@@ -12,6 +13,7 @@ public class Player : MonoBehaviour {
 
     private float jumpPower = 12f;
     private float jumpDelay = 0.6f;
+    public float jumpTimer; //equal to delay
 
     private float stunTime = 1.5f;
 
@@ -32,6 +34,8 @@ public class Player : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        jumpTimer = jumpDelay;
+        collisionTag = null;
         _rigidbody = this.GetComponent<Rigidbody>();
         Physics.gravity = new Vector3(0, -29.8f, 0);
         Physics.gravity = new Vector3(0, -29.8f, 0); //<
@@ -44,6 +48,33 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        //Collision
+        Ray ray = new Ray(this.transform.position, this.transform.up * -1);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, 2))
+        {
+            collisionTag = hit.transform.tag;
+            if (hit.transform.tag == "Ice")
+            {
+                _rigidbody.drag = .0f;
+            }
+            else if (hit.transform.tag == "Player")
+            {
+                _rigidbody.AddForce(new Vector3(0, 2, 0), ForceMode.VelocityChange);
+            }
+            else
+            {
+                _rigidbody.drag = dragAmount;
+                _rigidbody.angularDrag = 0.05f;
+            }
+        }
+        else
+        {
+            _rigidbody.drag = dragAmount;
+            _rigidbody.angularDrag = 0.05f;
+            collisionTag = null;
+        }
+    
         //keyboard is automatically applied to player one
         if (!canMove)
         {
@@ -122,6 +153,10 @@ public class Player : MonoBehaviour {
 
             //moving character
             _rigidbody.AddForce(axisVector * 4 * maxSpeed);
+            if(_rigidbody.velocity.magnitude > maxSpeed)
+            {
+                _rigidbody.velocity = _rigidbody.velocity.normalized * maxSpeed;
+            }
 
             //rotating character
             Vector2 t = new Vector2(moveX, moveY);
@@ -139,7 +174,7 @@ public class Player : MonoBehaviour {
 
         if (canJump && Input.GetButtonDown("Jump_" + controllerNumber) || canJump && (Input.GetKeyDown(KeyCode.Space) && controllerNumber == 1))
         {
-            StartCoroutine(Jump());
+            Jump();
         }
 
         if (Input.GetButtonDown("Submit_" + controllerNumber))
@@ -153,14 +188,18 @@ public class Player : MonoBehaviour {
             Debug.Log("Punch");
             StartCoroutine(Punch(2.0f));
         }
+
+        jumpTimer-= Time.deltaTime;
     }
 
-    IEnumerator Jump()
+    void Jump()
     {
-        canJump = false;
-        jump();
-        yield return new WaitForSeconds(jumpDelay);
-        canJump = true;
+        if(collisionTag != null && jumpTimer < 0)
+        {
+            jumpTimer = jumpDelay;
+            jump();
+        }
+       
     }
 
     IEnumerator Punch(float time)

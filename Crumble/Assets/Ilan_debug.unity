@@ -190,23 +190,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &71075612 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1396145760994002, guid: 75d32806bc97f014a99a50715c501010,
-    type: 2}
-  m_PrefabInternal: {fileID: 1897894739}
---- !u!114 &71075619
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 71075612}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88351e962bb0ef744a835b8ba2aeab21, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dragAmount: 2
 --- !u!1 &105374304
 GameObject:
   m_ObjectHideFlags: 0
@@ -572,7 +555,7 @@ MeshCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 349813566}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 9a6fa488eef244a48becbea2f312633e, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -3865,7 +3848,7 @@ MeshCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 672879872}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 9a6fa488eef244a48becbea2f312633e, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -4171,7 +4154,7 @@ MeshCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 839013748}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 9a6fa488eef244a48becbea2f312633e, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -4193,7 +4176,6 @@ GameObject:
   - component: {fileID: 845659262}
   - component: {fileID: 845659261}
   - component: {fileID: 845659260}
-  - component: {fileID: 845659266}
   m_Layer: 0
   m_Name: Player v2
   m_TagString: Player
@@ -4229,8 +4211,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0af0068212d5d86439a838738aee9c61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dragAmount: 2
+  collisionTag: 
   controllerNumber: 1
   maxSpeed: 10
+  jumpTimer: 0
 --- !u!23 &845659262
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4270,7 +4255,7 @@ CapsuleCollider:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 845659259}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: ea769a6cfdd6fb048a9f49f659679f86, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
@@ -4301,18 +4286,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &845659266
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 845659259}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88351e962bb0ef744a835b8ba2aeab21, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dragAmount: 2
 --- !u!1 &898690507 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100010, guid: 9671f68fa00593c48abcca8a0d7d6604, type: 3}
@@ -4757,7 +4730,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1197955521}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 2.6, y: -3.93, z: 0}
+  m_LocalPosition: {x: 2.6, y: -3.41, z: 0}
   m_LocalScale: {x: 280.52002, y: 143.48267, z: 143.48267}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4989,7 +4962,7 @@ MeshCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1529052434}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 9a6fa488eef244a48becbea2f312633e, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -6082,6 +6055,17 @@ Prefab:
     - target: {fileID: 1396145760994002, guid: 75d32806bc97f014a99a50715c501010, type: 2}
       propertyPath: m_TagString
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 136940902700022574, guid: 75d32806bc97f014a99a50715c501010,
+        type: 2}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: ea769a6cfdd6fb048a9f49f659679f86,
+        type: 2}
+    - target: {fileID: 114116371753068052, guid: 75d32806bc97f014a99a50715c501010,
+        type: 2}
+      propertyPath: dragAmount
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 75d32806bc97f014a99a50715c501010, type: 2}
