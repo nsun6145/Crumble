@@ -16,16 +16,6 @@ public class Fist : MonoBehaviour {
 		
 	}
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.tag == "Player" && !parentPlayerScript.CanPunch)
-        {
-            Debug.Log("Punched!");
-            Vector3 direction = new Vector3(parentPlayerScript.MoveX, 0 , parentPlayerScript.MoveY);
-            other.gameObject.GetComponent<Player>().stun(direction);
-        }
-    }
-
     public void punch(float time, Vector3 direction)
     {
         StartCoroutine(Punch(time, direction));

@@ -23,8 +23,8 @@ public class ControllerManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
-	}
+        Debug.Log(joystickArrayLength);
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -33,6 +33,5 @@ public class ControllerManager : MonoBehaviour {
         joystickNames = Input.GetJoystickNames();
         joystickArrayLength = joystickNames.Length;
 
-        Debug.Log(joystickArrayLength);
 	}
 }

@@ -8,18 +8,17 @@ public class Player : MonoBehaviour {
     private int playerNumber; //player number in relation to the game
     public int controllerNumber; //joystick number of player, public for debug
     private Vector3 startingPosition = new Vector3(0.0f,1.0f,-6.5f);
-
-    public float maxSpeed = 8.0f;
-
-    private float jumpPower = 12f;
+    public float maxSpeed = 9.0f;
+    private float jumpPower = 30f;
     private float jumpDelay = 0.6f;
     public float jumpTimer; //equal to delay
-
+    private float punchDelay = .6f;
+    private float canPunch;
+    public GameObject[] otherPlayers;
     private float stunTime = 1.5f;
 
 
     private bool canJump = true;
-    private bool canPunch = true;
     private bool canMove = true;
 
     private Rigidbody _rigidbody;
@@ -35,15 +34,13 @@ public class Player : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         jumpTimer = jumpDelay;
+        canPunch = punchDelay;
         collisionTag = null;
         _rigidbody = this.GetComponent<Rigidbody>();
         Physics.gravity = new Vector3(0, -29.8f, 0);
         Physics.gravity = new Vector3(0, -29.8f, 0); //<
 
         //controllerNumber = 1;
-
-        rightFist = this.transform.GetChild(0).gameObject.GetComponent<Fist>();
-        //punchBox = this.transform.Find("PunchBox").gameObject;
 	}
 	
 	// Update is called once per frame
@@ -60,7 +57,8 @@ public class Player : MonoBehaviour {
             }
             else if (hit.transform.tag == "Player")
             {
-                _rigidbody.AddForce(new Vector3(0, 2, 0), ForceMode.VelocityChange);
+                hit.rigidbody.AddForce(-4 * this.transform.forward, ForceMode.VelocityChange);
+                _rigidbody.AddForce(10 * Vector3.up);
             }
             else
             {
@@ -143,9 +141,10 @@ public class Player : MonoBehaviour {
                 }
             }
         }
-
+ 
         if (moveX != 0 || moveY != 0) //only does movement code if you are moving
         {
+            transform.gameObject.GetComponent<Animator>().SetBool("Moving", true);
             Vector3 axisVector = new Vector3(
                                                 moveX,
                                                 0,
@@ -153,10 +152,6 @@ public class Player : MonoBehaviour {
 
             //moving character
             _rigidbody.AddForce(axisVector * 4 * maxSpeed);
-            if(_rigidbody.velocity.magnitude > maxSpeed)
-            {
-                _rigidbody.velocity = _rigidbody.velocity.normalized * maxSpeed;
-            }
 
             //rotating character
             Vector2 t = new Vector2(moveX, moveY);
@@ -169,7 +164,10 @@ public class Player : MonoBehaviour {
                 rotation = Quaternion.Euler(new Vector3(0, Mathf.Atan2(moveX, moveY) * Mathf.Rad2Deg, 0));
                 this.transform.rotation = rotation;
             }
-
+        }
+        else
+        {
+            transform.gameObject.GetComponent<Animator>().SetBool("Moving", false);
         }
 
         if (canJump && Input.GetButtonDown("Jump_" + controllerNumber) || canJump && (Input.GetKeyDown(KeyCode.Space) && controllerNumber == 1))
@@ -183,13 +181,13 @@ public class Player : MonoBehaviour {
             _rigidbody.position = startingPosition;
         }
         //Punching
-        if (canPunch && Input.GetButtonDown("Punch_" + controllerNumber))
+        if (canPunch < 0 && Input.GetButtonDown("Punch_" + controllerNumber) || canPunch < 0 && (Input.GetKeyDown(KeyCode.LeftShift) && controllerNumber == 1))
         {
-            Debug.Log("Punch");
-            StartCoroutine(Punch(2.0f));
+            StartCoroutine(Punch());
         }
 
         jumpTimer-= Time.deltaTime;
+        canPunch -= Time.deltaTime;
     }
 
     void Jump()
@@ -202,24 +200,22 @@ public class Player : MonoBehaviour {
        
     }
 
-    IEnumerator Punch(float time)
+    IEnumerator Punch()
     {
-        canPunch = false;
-        //float timer = 0.0f;
-        //Vector3 originalPos = rightFist.transform.position;
-        //direction.Normalize();
-        //Debug.Log("Above the loop");
-        //while(timer <= time)
-        //{
+        Debug.Log("Punch");
+        transform.gameObject.GetComponent<Animator>().SetTrigger("Punching");
+        canPunch = punchDelay;
 
-        //    rightFist.transform.position = originalPos + (Mathf.Sin(timer / time * Mathf.PI) + 1.0f) * direction;
-        //    Debug.Log(rightFist.transform.position);
-        //    yield return null;
-        //    timer += Time.deltaTime;
-        //}
-        //rightFist.transform.position = originalPos;
-        yield return new WaitForSeconds(time);
-        canPunch = true;
+        yield return new WaitForSeconds(.25f);
+        for (int i = 0; i < otherPlayers.Length; i++)
+        {
+            if ((otherPlayers[i].transform.position - (transform.position + 1.5f * transform.forward)).magnitude < 2)
+            {
+                otherPlayers[i].GetComponent<Rigidbody>().AddForce(700*transform.forward);
+                
+            }
+        }
+        
     }
 
     IEnumerator Stun(Vector3 direction)
@@ -233,13 +229,7 @@ public class Player : MonoBehaviour {
 
     private void jump()
     {
-        _rigidbody.AddForce(new Vector3(0, jumpPower, 0), ForceMode.VelocityChange);
-    }
-
-
-    public bool CanPunch
-    {
-        get { return canPunch; }
+        _rigidbody.AddForce(new Vector3(0, jumpPower, 0), ForceMode.Impulse);
     }
 
     public float MoveX
@@ -258,7 +248,7 @@ public class Player : MonoBehaviour {
     }
 
     private void footstool() {
-        _rigidbody.AddForce(new Vector3(0, jumpPower / 2, 0), ForceMode.VelocityChange);
+        _rigidbody.AddForce(new Vector3(0, jumpPower, 0), ForceMode.VelocityChange);
     }
 
     private void bounce() {
