@@ -48,12 +48,14 @@ public class Player : MonoBehaviour {
         //Collision
         Ray ray = new Ray(this.transform.position, this.transform.up * -1);
         RaycastHit hit;
+        maxSpeed = 9.0f;
         if (Physics.Raycast(ray, out hit, 2))
         {
             collisionTag = hit.transform.tag;
             if (hit.transform.tag == "Ice")
             {
-                _rigidbody.drag = .0f;
+                _rigidbody.drag = .75f;
+                maxSpeed = 4.0f;
             }
             else if (hit.transform.tag == "Player")
             {
@@ -206,12 +208,12 @@ public class Player : MonoBehaviour {
         transform.gameObject.GetComponent<Animator>().SetTrigger("Punching");
         canPunch = punchDelay;
 
-        yield return new WaitForSeconds(.25f);
+        yield return new WaitForSeconds(.35f);
         for (int i = 0; i < otherPlayers.Length; i++)
         {
-            if ((otherPlayers[i].transform.position - (transform.position + 1.5f * transform.forward)).magnitude < 2)
+            if ((otherPlayers[i].transform.position - (transform.position + 1.3f * transform.forward)).magnitude < 2)
             {
-                otherPlayers[i].GetComponent<Rigidbody>().AddForce(700*transform.forward);
+                otherPlayers[i].GetComponent<Rigidbody>().AddForce(800*transform.forward);
                 
             }
         }
