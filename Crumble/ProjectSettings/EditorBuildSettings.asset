@@ -9,3 +9,5 @@ EditorBuildSettings:
     path: Assets/Ilan_debug.unity
   - enabled: 1
     path: Assets/StartMenu.unity
+  - enabled: 1
+    path: Assets/PreGame.unity
