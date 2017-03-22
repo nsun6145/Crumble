@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour {
     public float dragAmount;
     public string collisionTag;
-    private int playerNumber; //player number in relation to the game
+    public int playerNumber; //player number in relation to the game
     public int controllerNumber; //joystick number of player, public for debug
     private Vector3 startingPosition = new Vector3(0.0f,1.0f,-6.5f);
     public float maxSpeed = 9.0f;
@@ -14,18 +14,16 @@ public class Player : MonoBehaviour {
     public float jumpTimer; //equal to delay
     private float punchDelay = .6f;
     private float canPunch;
-    public GameObject[] otherPlayers;
+    public GameObject[] listOfPlayers;
     private float stunTime = 1.5f;
 
-
+    public bool alive = true;
     private bool canJump = true;
     private bool canMove = true;
 
     private Rigidbody _rigidbody;
     private Quaternion rotation;
 
-
-    private Fist rightFist;
     //private GameObject punchBox;
 
 	float moveX = 0;
@@ -33,18 +31,28 @@ public class Player : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        controllerNumber = playerNumber;
+        listOfPlayers = new GameObject[transform.parent.childCount];
+        for (int i = 0; i < listOfPlayers.Length; i++)
+        {
+            listOfPlayers[i] = transform.parent.GetChild(i).gameObject;
+        }
         jumpTimer = jumpDelay;
         canPunch = punchDelay;
         collisionTag = null;
         _rigidbody = this.GetComponent<Rigidbody>();
         Physics.gravity = new Vector3(0, -29.8f, 0);
-        Physics.gravity = new Vector3(0, -29.8f, 0); //<
 
         //controllerNumber = 1;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        if(this.transform.position.y < -3)
+        {
+            alive = false;
+            canMove = false;
+        }
         //Collision
         Ray ray = new Ray(this.transform.position, this.transform.up * -1);
         RaycastHit hit;
@@ -80,12 +88,12 @@ public class Player : MonoBehaviour {
         {
             return;
         }
-        else if (controllerNumber != 1)
+        else if (controllerNumber != 0)
         {
             moveX = Input.GetAxis("Horizontal_" + controllerNumber);
             moveY = Input.GetAxis("Vertical_" + controllerNumber);
         }
-        if (controllerNumber == 1)
+        if (controllerNumber == 0)
         {
             if (Input.GetKey("up")) {
                 moveY = Mathf.Min(1, moveY + .8f);
@@ -172,20 +180,34 @@ public class Player : MonoBehaviour {
             transform.gameObject.GetComponent<Animator>().SetBool("Moving", false);
         }
 
-        if (canJump && Input.GetButtonDown("Jump_" + controllerNumber) || canJump && (Input.GetKeyDown(KeyCode.Space) && controllerNumber == 1))
+        if (canJump && (Input.GetKeyDown(KeyCode.Space) && controllerNumber == 0))
         {
             Jump();
         }
-
-        if (Input.GetButtonDown("Submit_" + controllerNumber))
-        {
-            _rigidbody.velocity = new Vector3();
-            _rigidbody.position = startingPosition;
-        }
-        //Punching
-        if (canPunch < 0 && Input.GetButtonDown("Punch_" + controllerNumber) || canPunch < 0 && (Input.GetKeyDown(KeyCode.LeftShift) && controllerNumber == 1))
+        if (canPunch < 0 && (Input.GetKeyDown(KeyCode.LeftShift) && controllerNumber == 0))
         {
             StartCoroutine(Punch());
+        }
+        if (Input.GetKey("1"))
+        {
+            _rigidbody.velocity = new Vector3();
+            transform.position = transform.parent.position + new Vector3(2 * playerNumber, 0, 2 * playerNumber);
+        }
+        if (controllerNumber != 0)
+        {
+            if(canJump && Input.GetButtonDown("Jump_" + controllerNumber))
+            {
+                Jump();
+            }
+            if (Input.GetButtonDown("Submit_" + controllerNumber))
+            {
+                _rigidbody.velocity = new Vector3();
+                transform.position = transform.parent.position + new Vector3(2 * playerNumber, 0, 2 * playerNumber);
+            }
+            if(canPunch < 0 && Input.GetButtonDown("Punch_" + controllerNumber))
+            {
+                StartCoroutine(Punch());
+            }
         }
 
         jumpTimer-= Time.deltaTime;
@@ -209,11 +231,11 @@ public class Player : MonoBehaviour {
         canPunch = punchDelay;
 
         yield return new WaitForSeconds(.35f);
-        for (int i = 0; i < otherPlayers.Length; i++)
+        for (int i = 0; i < listOfPlayers.Length; i++)
         {
-            if ((otherPlayers[i].transform.position - (transform.position + 1.3f * transform.forward)).magnitude < 2)
+            if ((listOfPlayers[i].transform.position - (transform.position + 1.3f * transform.forward)).magnitude < 2 && i != playerNumber)
             {
-                otherPlayers[i].GetComponent<Rigidbody>().AddForce(800*transform.forward);
+                listOfPlayers[i].GetComponent<Rigidbody>().AddForce(850*transform.forward);
                 
             }
         }

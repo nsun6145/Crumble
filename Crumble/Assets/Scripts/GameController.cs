@@ -12,9 +12,37 @@ public class GameController : MonoBehaviour {
     private float timer = 0;
     private int animNum = -1;
     private int dropNum = -1;
+    public GameObject playerPrefab;
+    public GameObject parentOfPlayers;
+    public GameObject[] listOfPlayers;
 
-	// Use this for initialization
-	void Start () {
+    public Color[] playerColorMain;
+    public Color[] playerColorHair;
+
+    // Use this for initialization
+    void Start () {
+        for (int i = 0; i < 2; i++)
+        {
+            Instantiate(playerPrefab, parentOfPlayers.transform.position, parentOfPlayers.transform.rotation, parentOfPlayers.transform);
+        }
+       
+        listOfPlayers = new GameObject[parentOfPlayers.transform.childCount];
+        for (int i = 0; i < listOfPlayers.Length; i++)
+        {
+            listOfPlayers[i] = parentOfPlayers.transform.GetChild(i).gameObject;
+            Player playerScript = listOfPlayers[i].GetComponent<Player>();
+            playerScript.playerNumber = i;
+            listOfPlayers[i].transform.position += new Vector3(2 * i, 0, 2 * i);
+            
+            //Color Setup
+            listOfPlayers[i].transform.GetChild(1).FindChild("Cloth").gameObject.GetComponent<Renderer>().material.color = playerColorMain[i];
+            listOfPlayers[i].transform.GetChild(1).FindChild("Shirt").gameObject.GetComponent<Renderer>().material.color = playerColorMain[i] - Color.grey;
+            listOfPlayers[i].transform.GetChild(1).FindChild("Pants").gameObject.GetComponent<Renderer>().material.color = playerColorMain[i] + Color.grey;
+            listOfPlayers[i].transform.GetChild(1).FindChild("LeftArmShirt").gameObject.GetComponent<Renderer>().material.color = playerColorMain[i] - Color.grey;
+            listOfPlayers[i].transform.GetChild(1).FindChild("RightArmShirt").gameObject.GetComponent<Renderer>().material.color = playerColorMain[i] - Color.grey;
+            listOfPlayers[i].transform.GetChild(1).FindChild("Hair").gameObject.GetComponent<Renderer>().material.color = playerColorHair[i];
+
+        }
         if (createBlocksMap)
         {
             for (int i = -4; i < 5; i++)
@@ -39,7 +67,11 @@ public class GameController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        timer += Time.deltaTime;
+        if(playersAlive())
+        {
+            timer += Time.deltaTime;
+        }
+
         if(blocks.Count > 1 && timer >= 2)
         {
             if(animNum == -1)
@@ -69,5 +101,26 @@ public class GameController : MonoBehaviour {
     {
         blocks[dropNum].GetComponent<Block>().fallen = true;
         blocks.RemoveAt(dropNum);
+    }
+
+    bool playersAlive()
+    {
+        int numberAlive = 0;
+        for(int i = 0; i < listOfPlayers.Length; i++)
+        {
+            Player playerScript = listOfPlayers[i].GetComponent <Player> ();
+            if (playerScript.alive)
+            {
+                numberAlive++;
+            }
+        }
+        if(numberAlive > 1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }
