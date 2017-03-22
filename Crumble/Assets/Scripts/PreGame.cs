@@ -135,7 +135,7 @@ public class PreGame : MonoBehaviour {
 
         if (Input.GetButtonDown("Submit") && readyToStart)
         {
-            SceneManager.LoadScene("Ilan_debug");
+            SceneManager.LoadScene("Map Selector");
         }
     }
 
