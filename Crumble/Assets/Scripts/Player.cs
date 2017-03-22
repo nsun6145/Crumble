@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -31,7 +31,7 @@ public class Player : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        controllerNumber = playerNumber;
+        controllerNumber = playerNumber + 1;
         listOfPlayers = new GameObject[transform.parent.childCount];
         for (int i = 0; i < listOfPlayers.Length; i++)
         {
@@ -88,70 +88,10 @@ public class Player : MonoBehaviour {
         {
             return;
         }
-        else if (controllerNumber != 0)
-        {
-            moveX = Input.GetAxis("Horizontal_" + controllerNumber);
-            moveY = Input.GetAxis("Vertical_" + controllerNumber);
-        }
-        if (controllerNumber == 0)
-        {
-            if (Input.GetKey("up")) {
-                moveY = Mathf.Min(1, moveY + .8f);
-            }
-            if (Input.GetKey("down")) {
-                moveY = Mathf.Max(-1, moveY - .8f);
-            }
-            if (Input.GetKey("left")) {
-                moveX = Mathf.Max(-1, moveX - .8f);
-            }
-            if (Input.GetKey("right")) {
-                moveX = Mathf.Min(1, moveX + .8f);
-            }
+        moveX = Input.GetAxis("Horizontal_" + controllerNumber);
+        moveY = Input.GetAxis("Vertical_" + controllerNumber);
 
-            if (!Input.GetKey("up") && !Input.GetKey("down"))
-            {
-                if (moveY < 0)
-                {
-                    moveY = Mathf.Max(0, moveY - .9f);
-                }
-                else
-                {
-                    moveY = Mathf.Min(0, moveY + .9f);
-                }
-            }
-            if (!Input.GetKey("left") && !Input.GetKey("right"))
-            {
-                if (moveX < 0)
-                {
-                    moveX = Mathf.Max(0, moveX - .9f);
-                }
-                else
-                {
-                    moveX = Mathf.Min(0, moveX + .9f);
-                }
-            }
-
-            if (Mathf.Abs(moveX) > .75 && Mathf.Abs(moveY) > .75)
-            {
-                if (moveX < 0)
-                {
-                    moveX = -.75f;
-                }
-                else
-                {
-                    moveX = .75f;
-                }
-                if (moveY < 0)
-                {
-                    moveY = -.75f;
-                }
-                else
-                {
-                    moveY = .75f;
-                }
-            }
-        }
- 
+        transform.gameObject.GetComponent<Animator>().SetBool("Moving", false);
         if (moveX != 0 || moveY != 0) //only does movement code if you are moving
         {
             transform.gameObject.GetComponent<Animator>().SetBool("Moving", true);
@@ -175,39 +115,19 @@ public class Player : MonoBehaviour {
                 this.transform.rotation = rotation;
             }
         }
-        else
-        {
-            transform.gameObject.GetComponent<Animator>().SetBool("Moving", false);
-        }
 
-        if (canJump && (Input.GetKeyDown(KeyCode.Space) && controllerNumber == 0))
+        if(canJump && Input.GetButtonDown("Jump_" + controllerNumber))
         {
             Jump();
         }
-        if (canPunch < 0 && (Input.GetKeyDown(KeyCode.LeftShift) && controllerNumber == 0))
-        {
-            StartCoroutine(Punch());
-        }
-        if (Input.GetKey("1"))
+        if (Input.GetButtonDown("Submit_" + controllerNumber))
         {
             _rigidbody.velocity = new Vector3();
             transform.position = transform.parent.position + new Vector3(2 * playerNumber, 0, 2 * playerNumber);
         }
-        if (controllerNumber != 0)
+        if(canPunch < 0 && Input.GetButtonDown("Punch_" + controllerNumber))
         {
-            if(canJump && Input.GetButtonDown("Jump_" + controllerNumber))
-            {
-                Jump();
-            }
-            if (Input.GetButtonDown("Submit_" + controllerNumber))
-            {
-                _rigidbody.velocity = new Vector3();
-                transform.position = transform.parent.position + new Vector3(2 * playerNumber, 0, 2 * playerNumber);
-            }
-            if(canPunch < 0 && Input.GetButtonDown("Punch_" + controllerNumber))
-            {
-                StartCoroutine(Punch());
-            }
+            StartCoroutine(Punch());
         }
 
         jumpTimer-= Time.deltaTime;
@@ -235,7 +155,7 @@ public class Player : MonoBehaviour {
         {
             if ((listOfPlayers[i].transform.position - (transform.position + 1.3f * transform.forward)).magnitude < 2 && i != playerNumber)
             {
-                listOfPlayers[i].GetComponent<Rigidbody>().AddForce(850*transform.forward);
+                listOfPlayers[i].GetComponent<Rigidbody>().AddForce(1200*transform.forward);
                 
             }
         }

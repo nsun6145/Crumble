@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,7 +21,7 @@ public class GameController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 4; i++)
         {
             Instantiate(playerPrefab, parentOfPlayers.transform.position, parentOfPlayers.transform.rotation, parentOfPlayers.transform);
         }
