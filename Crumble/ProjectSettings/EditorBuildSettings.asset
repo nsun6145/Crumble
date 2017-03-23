@@ -15,3 +15,5 @@ EditorBuildSettings:
     path: Assets/Map Selector.unity
   - enabled: 1
     path: Assets/Lavalevel.unity
+  - enabled: 1
+    path: Assets/GameOver.unity

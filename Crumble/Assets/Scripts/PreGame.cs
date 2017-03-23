@@ -135,6 +135,7 @@ public class PreGame : MonoBehaviour {
 
         if (Input.GetButtonDown("Submit") && readyToStart)
         {
+            PlayerPrefs.SetInt("numberPlayers", activePlayers);
             SceneManager.LoadScene("Map Selector");
         }
     }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
 
@@ -12,6 +13,7 @@ public class GameController : MonoBehaviour {
     private float timer = 0;
     private int animNum = -1;
     private int dropNum = -1;
+    private int numPlayers = 0;
     public GameObject playerPrefab;
     public GameObject parentOfPlayers;
     public GameObject[] listOfPlayers;
@@ -21,7 +23,10 @@ public class GameController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        for (int i = 0; i < 4; i++)
+
+        numPlayers = PlayerPrefs.GetInt("numberPlayers");
+
+        for (int i = 0; i < numPlayers; i++)
         {
             Instantiate(playerPrefab, parentOfPlayers.transform.position, parentOfPlayers.transform.rotation, parentOfPlayers.transform);
         }
@@ -70,6 +75,10 @@ public class GameController : MonoBehaviour {
         if(playersAlive())
         {
             timer += Time.deltaTime;
+        }
+        else
+        {
+            SceneManager.LoadScene("GameOver");
         }
 
         if(blocks.Count > 1 && timer >= 2)
