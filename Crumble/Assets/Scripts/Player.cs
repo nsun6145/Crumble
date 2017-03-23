@@ -31,7 +31,7 @@ public class Player : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        controllerNumber = playerNumber + 1;
+        controllerNumber = PlayerPrefs.GetInt("Player" + playerNumber + "Controller");
         listOfPlayers = new GameObject[transform.parent.childCount];
         for (int i = 0; i < listOfPlayers.Length; i++)
         {

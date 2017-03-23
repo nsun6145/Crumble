@@ -66,12 +66,14 @@ public class PreGame : MonoBehaviour {
     private bool readyToStart = false;
 
     private PlayerPanel[] playerPanels;
+    private List<int> controllersIn;
     private Text readyText;
 
     // Use this for initialization
     void Start () {
         playerPanels = new PlayerPanel[4];
         activePlayers = 0;
+        controllersIn = new List<int>();
 
         readyText = GameObject.Find("Canvas/ReadyText").GetComponent<Text>();
 
@@ -90,51 +92,64 @@ public class PreGame : MonoBehaviour {
         checkReady();
 
         //Entering Game
-        if (Input.GetButtonDown("Jump_1"))
+        if (Input.GetButtonDown("Jump_1") && playerPanels[0].currentStatus != Status.ready)
         {
+            controllersIn.Add(1);
             playerPanels[0].currentStatus = Status.ready;
             activePlayers++;
         }
-        else if (Input.GetButtonDown("Jump_2"))
+        else if (Input.GetButtonDown("Jump_2") && playerPanels[1].currentStatus != Status.ready)
         {
+            controllersIn.Add(2);
             playerPanels[1].currentStatus = Status.ready;
             activePlayers++;
         }
-        else if (Input.GetButtonDown("Jump_3"))
+        else if (Input.GetButtonDown("Jump_3") && playerPanels[2].currentStatus != Status.ready)
         {
+            controllersIn.Add(3);
             playerPanels[2].currentStatus = Status.ready;
             activePlayers++;
         }
-        else if (Input.GetButtonDown("Jump_4"))
+        else if (Input.GetButtonDown("Jump_4") && playerPanels[3].currentStatus != Status.ready)
         {
+            controllersIn.Add(4);
             playerPanels[3].currentStatus = Status.ready;
             activePlayers++;
         }
 
         //Backing out
-        if (Input.GetButtonDown("Back_1"))
+        if (Input.GetButtonDown("Back_1") && playerPanels[0].currentStatus == Status.ready)
         {
+            controllersIn.Remove(1);
             playerPanels[0].currentStatus = Status.connected;
             activePlayers--;
         }
-        else if (Input.GetButtonDown("Back_2"))
+        else if (Input.GetButtonDown("Back_2") && playerPanels[1].currentStatus == Status.ready)
         {
+            controllersIn.Remove(2);
             playerPanels[1].currentStatus = Status.connected;
             activePlayers--;
         }
-        else if (Input.GetButtonDown("Back_3"))
+        else if (Input.GetButtonDown("Back_3") && playerPanels[2].currentStatus == Status.ready)
         {
+            controllersIn.Remove(3);
             playerPanels[2].currentStatus = Status.connected;
             activePlayers--;
         }
-        else if (Input.GetButtonDown("Back_4"))
+        else if (Input.GetButtonDown("Back_4") && playerPanels[3].currentStatus == Status.ready)
         {
+            controllersIn.Remove(4);
             playerPanels[3].currentStatus = Status.connected;
             activePlayers--;
         }
 
         if (Input.GetButtonDown("Submit") && readyToStart)
         {
+            for(int i = 0; i < activePlayers; i++)
+            {
+                string s = "Player" + i + "Controller";
+                PlayerPrefs.SetInt(s, controllersIn[i]);
+            }
             PlayerPrefs.SetInt("numberPlayers", activePlayers);
             SceneManager.LoadScene("Map Selector");
         }
